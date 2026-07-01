@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Startup Foundations for Marie Curie Alumni and selected PhDs — 5-Session Intensive</title>
-  <meta id="page-meta" name="description" content="A free 10-hour intensive workshop for Marie Curie Alumni and selected PhD graduates. Five weekly sessions. One completed YC application.">
+  <meta id="page-meta" name="description" content="A free 10-hour intensive workshop for Marie Curie Alumni and selected PhD graduates. Five weekly sessions. One draft YC application.">
   <style>
     :root {
       --navy:   #1a3a7a;
@@ -298,9 +298,9 @@ window.COURSE_CONFIG = {
     <p class="eyebrow" id="hero-eyebrow">Free · Online · 5-Session Intensive</p>
     <h1>Build a startup.<br>Five weeks. Ten hours.</h1>
     <p class="subtitle" id="hero-subtitle">
-      A free 10-hour sprint for Marie Curie Alumni and selected PhD grads — from customer interviews to a completed Y Combinator (YC) application, 
-      in five consecutive Wednesday sessions. <br>
-      <b>The July 2026 Edition of the course is in progress with 20 participants.</b>
+      A free 10-hour sprint for Marie Curie Alumni and selected PhD grads — from customer interviews to a draft Y Combinator (YC) application, 
+      in five consecutive Wednesday sessions. 
+      <br><b>The July 2026 Edition of the course is in progress with 20 participants.</b>
     </p>
     <div class="hero-meta">
       <div class="hero-meta-item">
@@ -330,7 +330,7 @@ window.COURSE_CONFIG = {
       Startup Foundations for Marie Curie Alumni and selected PhDs is a free online course covering customer discovery, minimum viable product, what YC looks for, and writing a competitive accelerator application — delivered in five consecutive Wednesday sessions.
     </p>
     <p>
-      It follows Paul Graham's approach, adapted for people with research expertise. The format is designed for Marie Curie alumni and PhDs who are already moving and want a structured sprint to a completed YC application, not a semester-long programme.
+      It follows Paul Graham's approach, adapted for people with research expertise. The format is designed for Marie Curie alumni and PhDs who are already moving and want a structured sprint to a draft YC application, not a semester-long programme.
     </p>
 
     <div class="callout">
@@ -597,13 +597,14 @@ window.COURSE_CONFIG = {
 
   document.title = "Startup Foundations for Marie Curie Alumni — 5-Session Intensive · " + fmtMonthYear(d1);
   document.getElementById("page-meta").content =
-    "A free 10-hour intensive for Marie Curie Alumni. Five weekly sessions. One completed YC application. " +
-    days + " " + ts + ", " + fmtLongRange(d1, s[5]) + ".";
+    "A free 10-hour intensive for Marie Curie Alumni. Five weekly sessions. One draft YC (Y Combinator) application. " +
+    days + " " + ts + ", " + fmtLongRange(d1, s[5]) + ". " + 
+    "<br>The July 2026 Edition of the course is in progress with 20 participants.";
 
   set("nav-cta",    "Apply — closes " + fmtShort(dl));
   set("hero-eyebrow", "Free · Online · 5-Session Intensive · " + fmtRange(d1, s[5]));
   set("hero-subtitle",
-      "A free 10-hour sprint for Marie Curie Alumni and selected PhDs — from customer interviews to a completed YC application, in five consecutive " + day + " sessions.");
+      "A free 10-hour sprint for Marie Curie Alumni and selected PhDs — from customer interviews to a draft YC application, in five consecutive " + day + " sessions.");
   set("hero-schedule-strong", days + " · " + ts);
   set("hero-schedule-start",  fmtLongRange(d1, s[5]));
   set("hero-deadline",        "Applications close " + fmtLong(dl));
