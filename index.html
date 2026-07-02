@@ -613,7 +613,11 @@ window.COURSE_CONFIG_A = {
   var pwEl = document.getElementById("prework-label");
   if (pwEl) pwEl.innerHTML = fmtShortRange(pw0, pw1) + "<br>Pre-work";
 
-  for (var i = 1; i <= 5; i++) document.getElementById("session-date-A-" + i).textContent=fmtShort(s[i]);
+  document.getElementById("session-date-A-1").textContent=fmtShort(s[1]);
+  document.getElementById("session-date-A-2").textContent=fmtShort(s[2]);
+  document.getElementById("session-date-A-3").textContent=fmtShort(s[3]);
+  document.getElementById("session-date-A-4").textContent=fmtShort(s[4]);
+  document.getElementById("session-date-A-5").textContent=fmtShort(s[5]);
 
   set("faq-miss",
       "In this case, you will be excluded from attending the remaining sessions. 
