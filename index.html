@@ -277,12 +277,12 @@
      ════════════════════════════════════════════════════════════════════ -->
 <script>
 window.COURSE_CONFIG = {
-  firstSession:        new Date(2026, 8, 9),  // YY MM DD
-  applicationDeadline: new Date(2026, 7, 31),  
+  firstSessionA:        new Date(2026, 8, 9),  // YY MM DD
+  applicationDeadlineA: new Date(2026, 7, 31),  
   notificationDate:    new Date(2026, 8, 3),  
-  sessionStart:        "18:00",
-  sessionEnd:          "20:00",
-  timezone:            "CET",
+  sessionStartA:        "18:00",
+  sessionEndA:          "20:00",
+  timezoneA:            "CET",
 };
 </script>
 
@@ -359,7 +359,7 @@ window.COURSE_CONFIG = {
           Alternatively, you graduate from a PhD program at least one year ago and you have at least one year of 
           research or work experience in a country different from your native one.</li>
       <li>You already decided that you want to create a startup and you have an idea to explore by interacting with potential customers.</li>
-      <li id="criteria-schedule">You can attend Thursdays 18:00–20:00 CET for five consecutive weeks from September 10</li>
+      <li id="criteria-schedule">You can attend Wednesday 18:00–20:00 CET for five consecutive weeks from September 10</li>
       <li>Completing three customer discovery interviews before Session 1 is required for attending Session 1. 
         Admitted applicants will receive a guide on how to conduct the interviews. </li>
       <li>Completing the tasks assigned at the end of each session is a requirement for attention the following session.</li>
@@ -523,7 +523,7 @@ window.COURSE_CONFIG = {
 <section class="final-cta" id="apply">
   <div class="container">
     <h2>Apply to Startup Foundations for Marie Curie Alumni and selected PhDs</h2>
-    <p id="cta-desc">Free · 10 hours · 5 weekly sessions · Thursdays 18:00–20:00 CET · September 10 – October 8, 2026</p>
+    <p id="cta-desc">Free · 10 hours · 5 weekly sessions · Wednesday 18:00–20:00 CET · September 9 – October 7, 2026</p>
     <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScK9GNuRdYDywnXmD-zBpDCKEltaV6eaQeMcbH5WwBV0gmEWw/viewform">Start your application</a>
     <p class="deadline-note" id="cta-deadline">Applications close August 31, 2026 · 20 places · Notifications by September 4</p>
   </div>
@@ -574,10 +574,10 @@ window.COURSE_CONFIG = {
   }
   function set(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
 
-  var d1   = cfg.firstSession;
-  var dl   = cfg.applicationDeadline;
+  var d1   = cfg.firstSessionA;
+  var dl   = cfg.applicationDeadlineA;
   var nt   = cfg.notificationDate;
-  var ts   = cfg.sessionStart + "–" + cfg.sessionEnd + " " + cfg.timezone;
+  var ts   = cfg.sessionStartA + "–" + cfg.sessionEndA + " " + cfg.timezoneA;
   var day  = DAYS[d1.getDay()];
   var days = day + "s";
 
