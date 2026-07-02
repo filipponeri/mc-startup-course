@@ -613,7 +613,7 @@ window.COURSE_CONFIG_A = {
   var pwEl = document.getElementById("prework-label");
   if (pwEl) pwEl.innerHTML = fmtShortRange(pw0, pw1) + "<br>Pre-work";
 
-  for (var i = 1; i <= 5; i++) set("session-date-A-" + i, fmtShort(s[i]));
+  for (var i = 1; i <= 5; i++) document.getElementById("session-date-A-" + i).textContent=fmtShort(s[i]);
 
   set("faq-miss",
       "In this case, you will be excluded from attending the remaining sessions. 
