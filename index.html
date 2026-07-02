@@ -535,7 +535,7 @@ window.COURSE_CONFIG_A = {
 </footer>
 
 <script>
-(function () {
+function update_page_dates () {
   var cfg = window.COURSE_CONFIG_A;
   var MONTHS = ["January","February","March","April","May","June",
                 "July","August","September","October","November","December"];
@@ -631,7 +631,8 @@ window.COURSE_CONFIG_A = {
       "Applications close " + fmtLong(dl) + " · 10 places (8 participants minimun) · Notifications by " + fmtShort(nt));
   set("footer-cohort",
       "Startup Foundations for Marie Curie Alumni · 5-Session Intensive · " + fmtRange(d1, s[5]));
-})();
+}
+update_page_dates();
 </script>
 
 </body>
