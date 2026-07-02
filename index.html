@@ -268,8 +268,6 @@
       .session-date { font-size: 12px; }
     }
   </style>
-</head>
-<body>
 
 <!-- ════════════════════════════════════════════════════════════════════
      CONFIGURATION — edit these values to update all dates on the page
@@ -284,7 +282,111 @@ window.COURSE_CONFIG_A = {
   sessionEndA:          "20:00",
   timezoneA:            "CET",
 };
+
+function update_page_dates () {
+  var cfg = window.COURSE_CONFIG_A;
+  var MONTHS = ["January","February","March","April","May","June",
+                "July","August","September","October","November","December"];
+  var SHORT  = ["Jan","Feb","Mar","Apr","May","Jun",
+                "Jul","Aug","Sep","Oct","Nov","Dec"];
+  var DAYS   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+  function addDays(d, n) { var r = new Date(d); r.setDate(r.getDate() + n); return r; }
+  function fmtLong(d)      { return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
+  function fmtShort(d)     { return SHORT[d.getMonth()] + " " + d.getDate(); }
+  function fmtMonthDay(d)  { return MONTHS[d.getMonth()] + " " + d.getDate(); }
+  function fmtMonthYear(d) { return MONTHS[d.getMonth()] + " " + d.getFullYear(); }
+  function fmtShortRange(a, b) {
+    if (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()) {
+      return SHORT[a.getMonth()] + " " + a.getDate() + "–" + b.getDate();
+    }
+    return fmtShort(a) + " – " + fmtShort(b);
+  }
+  function fmtLongRange(a, b) {
+    if (a.getFullYear() === b.getFullYear()) {
+      if (a.getMonth() === b.getMonth()) {
+        return MONTHS[a.getMonth()] + " " + a.getDate() + "–" + b.getDate() + ", " + a.getFullYear();
+      }
+      return MONTHS[a.getMonth()] + " " + a.getDate() + " – " + MONTHS[b.getMonth()] + " " + b.getDate() + ", " + a.getFullYear();
+    }
+    return fmtLong(a) + " – " + fmtLong(b);
+  }
+  function fmtRange(a, b) {
+    if (a.getFullYear() !== b.getFullYear()) {
+      return MONTHS[a.getMonth()] + " " + a.getFullYear() + "–" + MONTHS[b.getMonth()] + " " + b.getFullYear();
+    }
+    if (a.getMonth() !== b.getMonth()) {
+      return MONTHS[a.getMonth()] + "–" + MONTHS[b.getMonth()] + " " + a.getFullYear();
+    }
+    return fmtMonthYear(a);
+  }
+  function set(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+
+  var d1   = cfg.firstSessionA;
+  var dl   = cfg.applicationDeadlineA;
+  var nt   = cfg.notificationDate;
+  var ts   = cfg.sessionStartA + "–" + cfg.sessionEndA + " " + cfg.timezoneA;
+  var day  = DAYS[d1.getDay()];
+  var days = day + "s";
+
+  // 5 consecutive weekly sessions
+  var s = [null,
+    d1,
+    addDays(d1,  7),
+    addDays(d1, 14),
+    addDays(d1, 21),
+    addDays(d1, 28)
+  ];
+
+  // Pre-work window: 6 days before Session 1 through the day before
+  var pw0 = addDays(d1, -6);
+  var pw1 = addDays(d1, -1);
+
+  document.title = "Startup Foundations for Marie Curie Alumni — 5-Session Intensive · " + fmtMonthYear(d1);
+  document.getElementById("page-meta").content =
+    "A free 10-hour intensive for Marie Curie Alumni. Five weekly sessions. One draft YC (Y Combinator) application. " +
+    days + " " + ts + ", " + fmtLongRange(d1, s[5]) + ". ";
+
+  set("nav-cta",    "Apply — closes " + fmtShort(dl));
+  set("hero-eyebrow", "Free · Online · 5-Session Intensive · " + fmtRange(d1, s[5]));
+  set("hero-subtitle",
+      "A free 10-hour sprint for Marie Curie Alumni and selected PhDs — from customer interviews to a draft YC (Y Combinator) application, in five consecutive " + day + " sessions. The July 2026 Edition of the course is in progress with 20 participants.");
+  set("hero-schedule-strong", days + " · " + ts);
+  set("hero-schedule-start",  fmtLongRange(d1, s[5]));
+  set("hero-deadline",        "Applications close " + fmtLong(dl));
+  set("criteria-schedule",
+      "You can attend " + days + " " + ts + " for five consecutive weeks from " + fmtShort(d1));
+
+  // Prework label contains a <br>, so use innerHTML
+  var pwEl = document.getElementById("prework-label");
+  if (pwEl) pwEl.innerHTML = fmtShortRange(pw0, pw1) + "<br>Pre-work";
+
+  document.getElementById("session-date-A-1").textContent = "ssss";
+  document.getElementById("session-date-A-2").textContent = fmtShort(s[2]);
+  document.getElementById("session-date-A-3").textContent=fmtShort(s[3]);
+  document.getElementById("session-date-A-4").textContent=fmtShort(s[4]);
+  document.getElementById("session-date-A-5").textContent=fmtShort(s[5]);
+
+  set("faq-miss",
+      "In this case, you will be excluded from attending the remaining sessions. 
+        Each assignment and each sesssion feeds directly into the next ones, 
+        and are required in order to refine your startup concept and incubator application.
+        If your schedule does not allow you to commit the time and effort for attending the workshop, please do not apply.");
+
+  set("cta-desc",
+      "Free · 10 hours · 5 weekly sessions · " + days + " " + ts + " · " + fmtLongRange(d1, s[5]));
+  set("cta-deadline",
+      "Applications close " + fmtLong(dl) + " · 10 places (8 participants minimun) · Notifications by " + fmtShort(nt));
+  set("footer-cohort",
+      "Startup Foundations for Marie Curie Alumni · 5-Session Intensive · " + fmtRange(d1, s[5]));
+}
+update_page_dates();
 </script>
+  
+</head>
+<body>
+</body>
+</html>
 
 <!-- Nav -->
 <nav>
@@ -534,106 +636,3 @@ window.COURSE_CONFIG_A = {
   <p id="footer-cohort">Startup Foundations for Marie Curie Alumni and selected PhDs · 5-Session Intensive · September–October 2026</p>
 </footer>
 
-<script>
-function update_page_dates () {
-  var cfg = window.COURSE_CONFIG_A;
-  var MONTHS = ["January","February","March","April","May","June",
-                "July","August","September","October","November","December"];
-  var SHORT  = ["Jan","Feb","Mar","Apr","May","Jun",
-                "Jul","Aug","Sep","Oct","Nov","Dec"];
-  var DAYS   = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-  function addDays(d, n) { var r = new Date(d); r.setDate(r.getDate() + n); return r; }
-  function fmtLong(d)      { return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
-  function fmtShort(d)     { return SHORT[d.getMonth()] + " " + d.getDate(); }
-  function fmtMonthDay(d)  { return MONTHS[d.getMonth()] + " " + d.getDate(); }
-  function fmtMonthYear(d) { return MONTHS[d.getMonth()] + " " + d.getFullYear(); }
-  function fmtShortRange(a, b) {
-    if (a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear()) {
-      return SHORT[a.getMonth()] + " " + a.getDate() + "–" + b.getDate();
-    }
-    return fmtShort(a) + " – " + fmtShort(b);
-  }
-  function fmtLongRange(a, b) {
-    if (a.getFullYear() === b.getFullYear()) {
-      if (a.getMonth() === b.getMonth()) {
-        return MONTHS[a.getMonth()] + " " + a.getDate() + "–" + b.getDate() + ", " + a.getFullYear();
-      }
-      return MONTHS[a.getMonth()] + " " + a.getDate() + " – " + MONTHS[b.getMonth()] + " " + b.getDate() + ", " + a.getFullYear();
-    }
-    return fmtLong(a) + " – " + fmtLong(b);
-  }
-  function fmtRange(a, b) {
-    if (a.getFullYear() !== b.getFullYear()) {
-      return MONTHS[a.getMonth()] + " " + a.getFullYear() + "–" + MONTHS[b.getMonth()] + " " + b.getFullYear();
-    }
-    if (a.getMonth() !== b.getMonth()) {
-      return MONTHS[a.getMonth()] + "–" + MONTHS[b.getMonth()] + " " + a.getFullYear();
-    }
-    return fmtMonthYear(a);
-  }
-  function set(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
-
-  var d1   = cfg.firstSessionA;
-  var dl   = cfg.applicationDeadlineA;
-  var nt   = cfg.notificationDate;
-  var ts   = cfg.sessionStartA + "–" + cfg.sessionEndA + " " + cfg.timezoneA;
-  var day  = DAYS[d1.getDay()];
-  var days = day + "s";
-
-  // 5 consecutive weekly sessions
-  var s = [null,
-    d1,
-    addDays(d1,  7),
-    addDays(d1, 14),
-    addDays(d1, 21),
-    addDays(d1, 28)
-  ];
-
-  // Pre-work window: 6 days before Session 1 through the day before
-  var pw0 = addDays(d1, -6);
-  var pw1 = addDays(d1, -1);
-
-  document.title = "Startup Foundations for Marie Curie Alumni — 5-Session Intensive · " + fmtMonthYear(d1);
-  document.getElementById("page-meta").content =
-    "A free 10-hour intensive for Marie Curie Alumni. Five weekly sessions. One draft YC (Y Combinator) application. " +
-    days + " " + ts + ", " + fmtLongRange(d1, s[5]) + ". ";
-
-  set("nav-cta",    "Apply — closes " + fmtShort(dl));
-  set("hero-eyebrow", "Free · Online · 5-Session Intensive · " + fmtRange(d1, s[5]));
-  set("hero-subtitle",
-      "A free 10-hour sprint for Marie Curie Alumni and selected PhDs — from customer interviews to a draft YC (Y Combinator) application, in five consecutive " + day + " sessions. The July 2026 Edition of the course is in progress with 20 participants.");
-  set("hero-schedule-strong", days + " · " + ts);
-  set("hero-schedule-start",  fmtLongRange(d1, s[5]));
-  set("hero-deadline",        "Applications close " + fmtLong(dl));
-  set("criteria-schedule",
-      "You can attend " + days + " " + ts + " for five consecutive weeks from " + fmtShort(d1));
-
-  // Prework label contains a <br>, so use innerHTML
-  var pwEl = document.getElementById("prework-label");
-  if (pwEl) pwEl.innerHTML = fmtShortRange(pw0, pw1) + "<br>Pre-work";
-
-  document.getElementById("session-date-A-1").textContent = "ssss";
-  document.getElementById("session-date-A-2").textContent = fmtShort(s[2]);
-  document.getElementById("session-date-A-3").textContent=fmtShort(s[3]);
-  document.getElementById("session-date-A-4").textContent=fmtShort(s[4]);
-  document.getElementById("session-date-A-5").textContent=fmtShort(s[5]);
-
-  set("faq-miss",
-      "In this case, you will be excluded from attending the remaining sessions. 
-        Each assignment and each sesssion feeds directly into the next ones, 
-        and are required in order to refine your startup concept and incubator application.
-        If your schedule does not allow you to commit the time and effort for attending the workshop, please do not apply.");
-
-  set("cta-desc",
-      "Free · 10 hours · 5 weekly sessions · " + days + " " + ts + " · " + fmtLongRange(d1, s[5]));
-  set("cta-deadline",
-      "Applications close " + fmtLong(dl) + " · 10 places (8 participants minimun) · Notifications by " + fmtShort(nt));
-  set("footer-cohort",
-      "Startup Foundations for Marie Curie Alumni · 5-Session Intensive · " + fmtRange(d1, s[5]));
-}
-update_page_dates();
-</script>
-
-</body>
-</html>
